@@ -1,4 +1,4 @@
-import React, { useContext, memo } from "react";
+import React, { memo } from "react";
 // import { useDispatch } from 'react-redux';
 
 import Card from "../UI/Card";
