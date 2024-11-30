@@ -1,34 +1,37 @@
-import React, { useContext } from 'react';
+import React, { useContext, memo } from "react";
 // import { useDispatch } from 'react-redux';
 
-import Card from '../UI/Card';
-import './ProductItem.css';
+import Card from "../UI/Card";
+import "./ProductItem.css";
 // import { toggleFav } from '../../store/actions/products';
-import { ProductContext } from '../../context/products-context';
+// import { ProductContext } from '../../context/products-context';
+import { useStore } from "../../hook-store/store";
 
-const ProductItem = props => {
-  const toggle = useContext(ProductContext).toggleFav;
+const ProductItem = memo((props) => {
+  // console.log("rendenring");
+
+  const toggle = useStore(false)[1];
   // const dispatch = useDispatch();
 
   const toggleFavHandler = () => {
     // dispatch(toggleFav(props.id));
-    toggle(props.id)
+    toggle("TOGGLE_FAV", props.id);
   };
 
   return (
-    <Card style={{ marginBottom: '1rem' }}>
+    <Card style={{ marginBottom: "1rem" }}>
       <div className="product-item">
-        <h2 className={props.isFav ? 'is-fav' : ''}>{props.title}</h2>
+        <h2 className={props.isFav ? "is-fav" : ""}>{props.title}</h2>
         <p>{props.description}</p>
         <button
-          className={!props.isFav ? 'button-outline' : ''}
+          className={!props.isFav ? "button-outline" : ""}
           onClick={toggleFavHandler}
         >
-          {props.isFav ? 'Un-Favorite' : 'Favorite'}
+          {props.isFav ? "Un-Favorite" : "Favorite"}
         </button>
       </div>
     </Card>
   );
-};
+});
 
 export default ProductItem;
